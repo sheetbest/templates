@@ -2,32 +2,28 @@ const path = require('path');
 const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const pagesDir = path.resolve(__dirname, 'src/pages');
-const entry = {
-  index: path.resolve(__dirname, 'src/index.js')
-};
+const srcDir = path.resolve(__dirname, 'src');
+const entry = {};
 
-fs.readdirSync(pagesDir).forEach(folder => {
-  const folderPath = path.join(pagesDir, folder);
-  if (fs.statSync(folderPath).isDirectory()) {
-    entry[folder] = path.join(folderPath, 'index.js');
-  }
-});
+function addEntries(dir) {
+  fs.readdirSync(dir).forEach(file => {
+    const fullPath = path.join(dir, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      addEntries(fullPath);
+    } else if (file.endsWith('.js')) {
+      const name = path.relative(srcDir, fullPath).replace(/\\/g, '/').replace('.js', '');
+      entry[name] = fullPath;
+    }
+  });
+}
 
-const htmlPlugins = [
-  new HtmlWebpackPlugin({
-    filename: 'index.html',
-    template: path.resolve(__dirname, 'src/index.html'),
-    chunks: ['index'],
-  }),
-  ...Object.keys(entry).filter(name => name !== 'index').map(name => {
-    return new HtmlWebpackPlugin({
-      filename: `${name}.html`,
-      template: path.join(pagesDir, name, 'index.html'),
-      chunks: [name],
-    });
-  })
-];
+addEntries(srcDir);
+
+const htmlPlugins = Object.keys(entry).map(name => ({
+  filename: `${name}.html`,
+  template: entry[name].replace('.js', '.html'),
+  chunks: [name],
+}));
 
 module.exports = {
   mode: 'development',
@@ -41,19 +37,26 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        use: 'babel-loader',
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
-  plugins: [
-    ...htmlPlugins
-  ],
+  plugins: htmlPlugins.map(plugin => new HtmlWebpackPlugin(plugin)),
   devServer: {
     static: './dist',
     open: true,
