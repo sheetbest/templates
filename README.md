@@ -1,6 +1,6 @@
-# SheetBest Templates
+# Sheet Best Templates
 
-Welcome to the SheetBest Templates repository! This repository contains a collection of templates to help you get started with SheetBest, a powerful tool for integrating Google Sheets with your applications.
+Welcome to the Sheet Best Templates repository! This repository contains a collection of templates to help you get started with Sheet Best, a powerful tool for integrating Google Sheets with your applications.
 
 ## Table of Contents
 
@@ -12,19 +12,19 @@ Welcome to the SheetBest Templates repository! This repository contains a collec
 
 ## Introduction
 
-SheetBest Templates provides a variety of pre-built templates that you can use to quickly set up and customize your Google Sheets integrations. Whether you're building a simple data entry form or a complex data analysis tool, these templates will help you get up and running in no time.
+Sheet Best Templates provides a variety of pre-built templates that you can use to quickly set up and customize your Google Sheets integrations. Whether you're building a simple data entry form or a complex data analysis tool, these templates will help you get up and running in no time. These templates are powered by the [Sheet Best JS Library](https://github.com/sheetbest/sheet-best-templates)
 
 ## Getting Started
 
-To get started with SheetBest Templates, follow these steps:
+To get started with Sheet Best Templates, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/sheetbest/samples.git
+    git clone https://github.com/sheetbest/templates.git
     ```
 2. Navigate to the project directory:
     ```sh
-    cd samples
+    cd templates
     ```
 3. Browse the available templates and choose one that fits your needs.
 
@@ -33,11 +33,10 @@ To get started with SheetBest Templates, follow these steps:
 Here are some of the templates available in this repository:
 
 - **Feedback Form**: A simple form for sharing feedback into a Google Sheet.
-- **Testimonial Block (comming soon)**: A template for gathering and displaying user testimonials on your site.
+- **Testimonial Block (coming soon)**: A template for gathering and displaying user testimonials on your site.
 - **More Templates Coming Soon**: We are actively gathering feedback and developing new templates. If you have any specific use cases or ideas, please share them with us (just open a ticket or drop us a message).
 
-Templates are built with Tailwind CSS, and use standard Javascript to reduce dependencies. Feel free to use your framework of choice.
-
+Templates are built with Tailwind CSS, and use standard JavaScript to reduce dependencies. Feel free to use your framework of choice.
 
 ## Contributing
 
@@ -62,4 +61,4 @@ This repository is licensed under the MIT License. See the [LICENSE](LICENSE) fi
 
 ---
 
-Thank you for using SheetBest Templates! If you have any questions or need further assistance, please feel free to open an issue or contact us.
+Thank you for using Sheet Best Templates! If you have any questions or need further assistance, please feel free to open an issue or contact us.
