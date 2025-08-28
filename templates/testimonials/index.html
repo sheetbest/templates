@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonials - Collect and Display Customer Reviews</title>
+  <meta name="description" content="A testimonials component that allows collecting user testimonials and showcasing them with Google Sheets integration via SheetBest API.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.sheet.best/sheet-best-templates.js"></script>
+
+  <script>
+    document.addEventListener('sheetbest-load-complete', (event) => {
+      document.getElementById('loading').classList.add('hidden');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('div[data-sheet-best]').forEach(element => {
+        element.addEventListener('sheetbest-load-failed', function(event) {
+          console.log('Element class attribute:', event.detail.status, element.getAttribute('data-sheet-best'));
+          document.getElementById('fail_message').classList.remove('hidden');
+        });
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('currentDate').value = new Date().toISOString().split('T')[0];;
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('form[data-sheet-best]').forEach(form => {
+        form.addEventListener('submit-finished', (event) => {
+          console.log('Submit finished: ', event);
+          form.reset();
+          form.querySelector('.returnMessage').textContent = 'Submit finished successfully!';
+      });
+    });
+});
+  </script>
+</head>
+<body class="bg-white flex items-center justify-center">
+  <div class="bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-base/7 font-semibold text-green-600">Testimonials</h2>
+        <p class="mt-2 text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">We have worked with thousands of amazing people</p>
+      </div>
+
+      <div class="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
+        <div id="fail_message" class="hidden -mt-8 p-8 text-red-500 text-center">
+          Failed to load testimonials. Please try again later.
+        </div>
+        <div class="-mt-8 sm:-mx-4 sm:columns-2 sm:text-[0] lg:columns-3" id="loading">
+          <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <div class="flex animate-pulse space-x-4 p-8">
+              <div class="size-10 rounded-full bg-gray-200"></div>
+              <div class="flex-1 space-y-6 py-1">
+                <div class="h-2 rounded bg-gray-200"></div>
+                <div class="space-y-3">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-2 h-2 rounded bg-gray-200"></div>
+                    <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+                  </div>
+                  <div class="h-2 rounded bg-gray-200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <div class="flex animate-pulse space-x-4 p-8">
+              <div class="size-10 rounded-full bg-gray-200"></div>
+              <div class="flex-1 space-y-6 py-1">
+                <div class="h-2 rounded bg-gray-200"></div>
+                <div class="space-y-3">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-2 h-2 rounded bg-gray-200"></div>
+                    <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+                  </div>
+                  <div class="h-2 rounded bg-gray-200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <div class="flex animate-pulse space-x-4 p-8">
+              <div class="size-10 rounded-full bg-gray-200"></div>
+              <div class="flex-1 space-y-6 py-1">
+                <div class="h-2 rounded bg-gray-200"></div>
+                <div class="space-y-3">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-2 h-2 rounded bg-gray-200"></div>
+                    <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+                  </div>
+                  <div class="h-2 rounded bg-gray-200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <div class="flex animate-pulse space-x-4 p-8">
+              <div class="size-10 rounded-full bg-gray-200"></div>
+              <div class="flex-1 space-y-6 py-1">
+                <div class="h-2 rounded bg-gray-200"></div>
+                <div class="space-y-3">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-2 h-2 rounded bg-gray-200"></div>
+                    <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+                  </div>
+                  <div class="h-2 rounded bg-gray-200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <div class="flex animate-pulse space-x-4 p-8">
+              <div class="size-10 rounded-full bg-gray-200"></div>
+              <div class="flex-1 space-y-6 py-1">
+                <div class="h-2 rounded bg-gray-200"></div>
+                <div class="space-y-3">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-2 h-2 rounded bg-gray-200"></div>
+                    <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+                  </div>
+                  <div class="h-2 rounded bg-gray-200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <div class="flex animate-pulse space-x-4 p-8">
+              <div class="size-10 rounded-full bg-gray-200"></div>
+              <div class="flex-1 space-y-6 py-1">
+                <div class="h-2 rounded bg-gray-200"></div>
+                <div class="space-y-3">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-2 h-2 rounded bg-gray-200"></div>
+                    <div class="col-span-1 h-2 rounded bg-gray-200"></div>
+                  </div>
+                  <div class="h-2 rounded bg-gray-200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="-mt-8 sm:-mx-4 sm:columns-2 sm:text-[0] lg:columns-3" data-sheet-best="https://api.staging.sheetbest.com/sheets/11d6386b-2d0e-406f-8bd3-ef708a3dc780/search?Published=1">
+          <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+            <figure class="rounded-2xl bg-gray-50 p-8 text-sm/6">
+              <blockquote class="text-gray-900">
+                <p>"{{ Testimonial }}"</p>
+              </blockquote>
+              <figcaption class="mt-6 flex items-center gap-x-4">
+                <img class="size-10 rounded-full bg-gray-50" src="https://ui-avatars.com/api/?name={{ Name }}" alt="" data-avatar="{{ Avatar }}">
+                <div>
+                  <div class="font-semibold text-gray-900">{{ Name }}</div>
+                   <div class="text-gray-600">{{ Role }}</div>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 py-8 lg:py-12">
+      <div class="w-full border-t border-green-200"></div>
+    </div>
+
+    <div class="mx-auto max-w-3xl px-6 lg:px-8 pb-6 lg:pb-8">
+
+      <div class="font-medium text-lg pb-2"">Thanks for cheering us on! Let us know your thoughts</div>
+      <form class="bg-white border-red-100 shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" data-sheet-best="https://api.staging.sheetbest.com/sheets/11d6386b-2d0e-406f-8bd3-ef708a3dc780">
+        <div class="px-4 py-6 sm:p-8">
+          <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
+            <div class="col-span-12">
+              <label for="name" class="block text-sm/6 font-medium text-gray-900">Name</label>
+              <div class="mt-2">
+                <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-green-600">
+                  <input type="text" name="Name" id="name" autocomplete="name" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" placeholder="Your name">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-12">
+              <label for="testimonial" class="block text-sm/6 font-medium text-gray-900">Testimonial</label>
+              <div class="mt-2">
+                <textarea name="Testimonial" id="testimonial" rows="3" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-green-600 sm:text-sm/6"></textarea>
+              </div>
+            </div>
+            <div class="col-span-12">
+              <label for="social" class="block text-sm/6 font-medium text-gray-900">Personal/Social Link</label>
+              <div class="mt-2">
+                <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-green-600">
+                  <input type="text" name="Social" id="social" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" placeholder="Your name">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-12 items-center justify-center text-center">
+              <p class="text-sm/6 text-gray-600 returnMessage"></p>
+            </div>
+
+            <div class="col-span-12 flex items-center justify-end gap-x-6 py-4">
+              <input type="hidden" name="Date" id="currentDate"/>
+              <button type="reset" class="text-sm/6 font-semibold text-gray-900">Reset</button>
+              <button type="submit" class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Submit Testimonial</button>
+            </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="items-center justify-center text-center py-4">
+      <p class="text-sm/6 text-gray-600">Powered by <a href="https://sheetbest.com" class="text-green-600 hover:underline">Sheet Best</a> and Google Sheets &trade;</p>
+      <p class="text-sm/6 text-gray-600">Find this code on <a href="https://github.com/sheetbest/samples" class="text-green-600 hover:underline">GitHub</a></p>
+    </div>
+  </div>
+</body>
+</html>
