@@ -29,6 +29,9 @@ build.on('close', (code) => {
   if (code === 0) {
     console.log('\n🔄 Starting file watcher and dev server...\n');
     
+    // Get port from environment or use default
+    const port = process.env.PORT || 3000;
+    
     // Start file watcher and server concurrently
     const watcher = spawn('npx', [
       'concurrently',
@@ -37,7 +40,7 @@ build.on('close', (code) => {
       '--names', 'watcher,server',
       '--prefix-colors', 'cyan,green',
       '"npx chokidar \\"templates/**/*\\" \\"src/**/*\\" -c \\"node build.js --watch\\""',
-      '"npx http-server dist -p 3000 -o --cors"'
+      `"npx http-server dist -p ${port} -o --cors"`
     ], {
       stdio: 'inherit',
       shell: true,
