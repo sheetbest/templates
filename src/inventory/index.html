@@ -45,7 +45,7 @@
       document.getElementById('detailPrice').textContent = price;
       document.getElementById('detailSupplier').textContent = supplier;
       document.getElementById('detailDescription').textContent = description;
-      
+
       // Set edit form values
       document.getElementById('editId').value = id;
       document.getElementById('editName').value = name;
@@ -54,7 +54,7 @@
       document.getElementById('editPrice').value = price;
       document.getElementById('editSupplier').value = supplier;
       document.getElementById('editDescription').value = description;
-      
+
       document.getElementById('listView').classList.add('hidden');
       document.getElementById('detailView').classList.remove('hidden');
     }
@@ -68,7 +68,7 @@
     function showItemForm(mode = 'create') {
       const form = document.getElementById('itemForm');
       const title = document.getElementById('formTitle');
-      
+
       if (mode === 'create') {
         title.textContent = 'Add New Item';
         document.getElementById('itemFormElement').reset();
@@ -86,7 +86,7 @@
         document.getElementById('formSupplier').value = document.getElementById('editSupplier').value;
         document.getElementById('formDescription').value = document.getElementById('editDescription').value;
       }
-      
+
       form.classList.remove('hidden');
       form.scrollIntoView({ behavior: 'smooth' });
     }
@@ -107,7 +107,7 @@
       const inventoryRows = document.querySelectorAll('.inventory-row');
       const emptyState = document.getElementById('empty_state');
       const inventoryTable = document.querySelector('.overflow-hidden');
-      
+
       if (inventoryRows.length === 0) {
         emptyState.classList.remove('hidden');
         inventoryTable.classList.add('hidden');
@@ -122,14 +122,14 @@
     function sortTable(columnIndex) {
       const table = document.getElementById('inventory-table');
       const rows = Array.from(table.querySelectorAll('.inventory-row'));
-      
+
       // Toggle sort direction
       sortDirection[columnIndex] = sortDirection[columnIndex] === 'asc' ? 'desc' : 'asc';
       const isAscending = sortDirection[columnIndex] === 'asc';
-      
+
       rows.sort((a, b) => {
         let aValue, bValue;
-        
+
         switch(columnIndex) {
           case 0: // Item name
             aValue = a.querySelector('.font-medium').textContent.trim().toLowerCase();
@@ -152,7 +152,7 @@
             bValue = b.cells[4].textContent.trim().toLowerCase();
             break;
         }
-        
+
         if (columnIndex === 2 || columnIndex === 3) {
           // Numeric sorting
           return isAscending ? aValue - bValue : bValue - aValue;
@@ -163,11 +163,11 @@
           return 0;
         }
       });
-      
+
       // Clear table and append sorted rows
       table.innerHTML = '';
       rows.forEach(row => table.appendChild(row));
-      
+
       // Update sort indicators
       updateSortIndicators(columnIndex, isAscending);
     }
@@ -336,7 +336,7 @@
               </tr>
             </thead>
             <tbody id="inventory-table" class="divide-y divide-gray-200 bg-white" data-sheet-best="https://api.sheetbest.com/sheets/e7398ed2-0d27-44d2-8cf3-665f799ba64e">
-              <tr class="inventory-row hover:bg-gray-50 cursor-pointer" 
+              <tr class="inventory-row hover:bg-gray-50 cursor-pointer"
                   onclick="showItemDetails('{{ Id }}', '{{ Name }}', '{{ Category }}', '{{ Quantity }}', '{{ Price }}', '{{ Supplier }}', '{{ Description }}')">
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                   <div class="flex items-center">
@@ -363,7 +363,7 @@
                   {{ Supplier }}
                 </td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                  <button onclick="event.stopPropagation(); showItemDetails('{{ Id }}', '{{ Name }}', '{{ Category }}', '{{ Quantity }}', '{{ Price }}', '{{ Supplier }}', '{{ Description }}')" 
+                  <button onclick="event.stopPropagation(); showItemDetails('{{ Id }}', '{{ Name }}', '{{ Category }}', '{{ Quantity }}', '{{ Price }}', '{{ Supplier }}', '{{ Description }}')"
                           class="text-blue-600 hover:text-blue-900">
                     View<span class="sr-only">, {{ Name }}</span>
                   </button>
@@ -417,7 +417,7 @@
               </div>
             </div>
           </div>
-          
+
           <div>
             <div class="space-y-6">
               <div class="bg-green-50 rounded-lg p-6">
@@ -426,7 +426,7 @@
                   <div class="text-sm text-green-600">Current Price</div>
                 </div>
               </div>
-              
+
               <div class="bg-gray-50 rounded-lg p-6">
                 <div class="text-center">
                   <div class="text-3xl font-bold text-gray-900" id="detailQuantity"></div>
