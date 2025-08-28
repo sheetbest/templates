@@ -1,0 +1,32 @@
+{
+  "name": "testimonials-template",
+  "version": "1.0.0",
+  "description": "A testimonials component that allows collecting user testimonials and showcasing them with Google Sheets integration via SheetBest API",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -o",
+    "dev": "npx http-server . -p 3000 -o -c-1",
+    "preview": "npx http-server . -p 3000 -o --cors"
+  },
+  "keywords": [
+    "google-sheets",
+    "testimonials",
+    "reviews",
+    "sheetbest",
+    "html-template",
+    "tailwind"
+  ],
+  "author": "SheetBest",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sheetbest/testimonials-template"
+  },
+  "homepage": "https://github.com/sheetbest/testimonials-template#readme"
+}

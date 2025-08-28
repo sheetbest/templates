@@ -1,42 +1,191 @@
 # Sheet Best Templates
 
-Welcome to the Sheet Best Templates repository! This repository contains a collection of templates to help you get started with Sheet Best, a powerful tool for integrating Google Sheets with your applications.
+A collection of pre-built templates for Google Sheets integrations using the Sheet Best JS Library. Templates include feedback forms, testimonials, jobs boards, and inventory management systems powered by Tailwind CSS and vanilla JavaScript.
 
-## Table of Contents
+## ✨ Features
 
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Templates](#templates)
-- [Contributing](#contributing)
-- [License](#license)
+- **🚀 Zero Setup** - Each template works out of the box
+- **📊 Google Sheets Backend** - No database required
+- **📱 Responsive Design** - Mobile-first approach
+- **🎨 Tailwind CSS** - Modern, utility-first styling
+- **📦 Self-Contained** - Each template is standalone
+- **🔧 Easy Customization** - Simple HTML/CSS/JS structure
 
-## Introduction
+## 🏗️ Build System
 
-Sheet Best Templates provides a variety of pre-built templates that you can use to quickly set up and customize your Google Sheets integrations. Whether you're building a simple data entry form or a complex data analysis tool, these templates will help you get up and running in no time. These templates are powered by the [Sheet Best JS Library](https://github.com/sheetbest/sheet-best-templates)
+This project uses a simple Node.js build script instead of complex webpack configurations:
 
-## Getting Started
+- **Templates** stored in `/templates/` directory
+- **Simple build script** copies templates to `/dist/`  
+- **No complex dependencies** - just Node.js and http-server
+- **Fast builds** - No bundling or compilation needed
 
-To get started with Sheet Best Templates, follow these steps:
+## 🚀 Quick Start
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/sheetbest/templates.git
-    ```
-2. Navigate to the project directory:
-    ```sh
-    cd templates
-    ```
-3. Browse the available templates and choose one that fits your needs.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/sheetbest/templates.git
+   cd templates
+   ```
 
-## Templates
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-Here are some of the templates available in this repository:
+3. **Development with auto-reload**:
+   ```bash
+   npm run dev
+   ```
 
-- **Feedback Form**: A simple form for sharing feedback into a Google Sheet.
-- **Testimonial Block (coming soon)**: A template for gathering and displaying user testimonials on your site.
-- **More Templates Coming Soon**: We are actively gathering feedback and developing new templates. If you have any specific use cases or ideas, please share them with us (just open a ticket or drop us a message).
+4. **Production build**:
+   ```bash
+   npm run build
+   ```
 
-Templates are built with Tailwind CSS, and use standard JavaScript to reduce dependencies. Feel free to use your framework of choice.
+5. **Build and serve (no watching)**:
+   ```bash
+   npm start
+   ```
+
+## 📦 Available Templates
+
+### 📝 [Feedback Form](./templates/feedback/)
+A simple feedback form that collects responses directly in Google Sheets.
+- Real-time form processing
+- Topic categorization
+- Success/error handling
+
+### ⭐ [Testimonials](./templates/testimonials/)
+Collect and display customer testimonials in a beautiful grid layout.
+- Star rating system
+- Approval workflow
+- Responsive testimonial cards
+
+### 💼 [Jobs Board](./templates/jobs/)
+Complete job listing system with application management.
+- Job search and filtering
+- Application form integration
+- Company and position tracking
+
+### 📋 [Inventory Management](./templates/inventory/)
+Full CRUD inventory system with stock tracking.
+- Sortable data tables
+- Low stock alerts
+- Supplier management
+- Item detail views
+
+## 🛠️ Development
+
+### Development Commands
+
+**Main Project:**
+- **`npm run dev`** - Start development server with automatic rebuilds and file watching
+- **`npm run build`** - Build templates to `dist/` directory  
+- **`npm start`** - Build once and serve (no file watching)
+- **`npm run watch`** - Advanced: Run file watcher and server separately
+
+**Individual Templates:**
+- **`npm run dev:feedback`** - Run feedback template standalone
+- **`npm run dev:testimonials`** - Run testimonials template standalone  
+- **`npm run dev:jobs`** - Run jobs template standalone
+- **`npm run dev:inventory`** - Run inventory template standalone
+
+**Or run directly in template directory:**
+```bash
+cd templates/feedback
+npm install  # only needed once per template
+npm start    # serves template on localhost:3000
+```
+
+### Development Workflow
+
+**For Main Project Development:**
+1. Run `npm run dev` to start development server
+2. Edit any file in `templates/` or `src/`  
+3. Browser automatically refreshes with changes
+4. Server runs on `http://localhost:3000`
+
+**For Individual Template Development:**
+1. `cd templates/[template-name]` (e.g., `cd templates/feedback`)
+2. `npm install` (first time only)
+3. `npm start` or `npm run dev` 
+4. Template serves directly on `http://localhost:3000`
+5. Edit template files directly - no build step needed!
+
+### Project Structure
+
+```
+sheetbest-templates/
+├── templates/              # Individual template directories
+│   ├── feedback/           # Feedback form template
+│   ├── testimonials/       # Testimonials template  
+│   ├── jobs/               # Jobs board template
+│   └── inventory/          # Inventory management template
+├── src/
+│   ├── index.html          # Main landing page
+│   └── images/             # Shared assets
+├── dist/                   # Built output (generated)
+├── build.js                # Build script
+├── dev-server.js           # Development server
+├── package.json            # Dependencies and scripts
+└── README.md              # This file
+```
+
+### Building Templates
+
+The build process:
+1. Copies main index page from `src/` to `dist/`
+2. Copies all templates from `templates/` to `dist/`
+3. Copies shared assets (images, etc.)
+4. Generates routing configuration
+
+### Creating New Templates
+
+1. Create new directory in `templates/`
+2. Add `index.html` (self-contained template)
+3. Add `README.md` (documentation)
+4. Run build script - template auto-discovered
+
+## 🌐 Deployment
+
+### Cloudflare Pages
+1. Connect your repository
+2. Set build command: `npm run build`
+3. Set output directory: `dist`
+
+### Other Platforms
+The build outputs static files to `dist/` that can be deployed anywhere:
+- Netlify
+- Vercel  
+- GitHub Pages
+- Any static hosting
+
+## 📡 API Setup
+
+Each template uses [SheetBest](https://sheetbest.com) to connect to Google Sheets:
+
+1. Create a Google Sheet with the required columns
+2. Sign up at [SheetBest](https://sheetbest.com)  
+3. Connect your sheet and get API endpoint
+4. Update the template's `data-sheet-best` attribute
+
+## 🎨 Customization
+
+### Styling
+Templates use Tailwind CSS via CDN. Modify classes directly in HTML or add custom CSS.
+
+### Functionality  
+Each template uses vanilla JavaScript for maximum compatibility and easy customization.
+
+### Form Fields
+Add/remove form fields by updating both the HTML form and Google Sheets columns.
+
+## 📚 Documentation
+
+- [SheetBest API Documentation](https://docs.sheetbest.com)
+- [Google Sheets API](https://developers.google.com/sheets/api)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
 ## Contributing
 

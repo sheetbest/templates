@@ -1,28 +1,41 @@
 {
-  "name": "testimonials",
+  "name": "sheetbest-templates",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A collection of pre-built templates for Google Sheets integrations using the Sheet Best JS Library",
+  "main": "build.js",
   "scripts": {
-    "start": "webpack serve --open",
-    "build": "webpack --mode production"
+    "build": "node build.js",
+    "start": "npm run build && npx http-server dist -p 3000 -o",
+    "dev": "node dev-server.js",
+    "watch": "npx concurrently \"npm run watch:files\" \"npm run serve\"",
+    "watch:files": "npx chokidar \"templates/**/*\" \"src/**/*\" -c \"node build.js --watch\"",
+    "serve": "npx http-server dist -p 3000 -o --cors",
+    "dev:feedback": "cd templates/feedback && npm start",
+    "dev:testimonials": "cd templates/testimonials && npm start",
+    "dev:jobs": "cd templates/jobs && npm start",
+    "dev:inventory": "cd templates/inventory && npm start"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
-    "autoprefixer": "^10.4.20",
-    "babel-loader": "^9.2.1",
-    "css-loader": "^7.1.2",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.6.3",
-    "postcss-loader": "^8.1.1",
-    "style-loader": "^4.0.0",
-    "tailwindcss": "^3.4.17",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0"
-  }
+  "keywords": [
+    "google-sheets",
+    "templates",
+    "sheetbest",
+    "forms",
+    "api",
+    "no-code"
+  ],
+  "author": "SheetBest",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sheetbest/templates"
+  },
+  "homepage": "https://github.com/sheetbest/templates#readme"
 }

@@ -1,0 +1,32 @@
+{
+  "name": "jobs-template",
+  "version": "1.0.0",
+  "description": "A complete jobs board that displays job listings from Google Sheets and allows applicants to submit applications directly",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -o",
+    "dev": "npx http-server . -p 3000 -o -c-1",
+    "preview": "npx http-server . -p 3000 -o --cors"
+  },
+  "keywords": [
+    "google-sheets",
+    "jobs-board",
+    "applications",
+    "sheetbest",
+    "html-template",
+    "tailwind"
+  ],
+  "author": "SheetBest",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sheetbest/jobs-template"
+  },
+  "homepage": "https://github.com/sheetbest/jobs-template#readme"
+}

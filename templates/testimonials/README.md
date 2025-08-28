@@ -13,18 +13,29 @@ A testimonials component that allows collecting user testimonials and showcasing
 
 ## 🚀 Quick Start
 
-1. **Clone this template**:
-   ```bash
-   git clone https://github.com/sheetbest/testimonials-template.git
-   cd testimonials-template
-   ```
+### Option 1: Direct Use (No Build Required)
+```bash
+git clone https://github.com/sheetbest/testimonials-template.git
+cd testimonials-template
+open index.html  # or double-click the file
+```
 
-2. **Open in browser**:
-   ```bash
-   open index.html
-   ```
+### Option 2: Development Server
+```bash
+git clone https://github.com/sheetbest/testimonials-template.git
+cd testimonials-template
+npm install
+npm start        # Opens browser to localhost:3000
+```
 
-3. **Set up your Google Sheet**:
+### Option 3: Development with Auto-Reload
+```bash
+npm run dev      # Serves with cache disabled for development
+```
+
+## 📊 Set up your Google Sheet
+
+1. **Set up your Google Sheet**:
    - Create a new Google Sheet
    - Add columns: `Name`, `Title`, `Company`, `Testimonial`, `Rating`, `Date`, `Approved`
    - Connect via [SheetBest](https://sheetbest.com)
