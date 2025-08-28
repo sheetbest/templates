@@ -3,7 +3,20 @@
 const { spawn } = require('child_process');
 const path = require('path');
 
-console.log('🚀 Starting SheetBest Templates Development Server...\n');
+// Parse command line arguments for injection control
+const args = process.argv.slice(2);
+const noInject = args.includes('--no-inject') || args.includes('--standalone');
+const inject = args.includes('--inject');
+
+// Set environment variable for child processes
+if (noInject) {
+  process.env.INJECT_FEATURES = 'false';
+} else if (inject) {
+  process.env.INJECT_FEATURES = 'true';
+}
+
+const modeText = process.env.INJECT_FEATURES === 'false' ? ' (standalone mode)' : ' (with main site features)';
+console.log(`🚀 Starting SheetBest Templates Development Server${modeText}...\n`);
 
 // Build initial version
 console.log('📦 Initial build...');

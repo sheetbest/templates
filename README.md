@@ -16,7 +16,7 @@ A collection of pre-built templates for Google Sheets integrations using the She
 This project uses a simple Node.js build script instead of complex webpack configurations:
 
 - **Templates** stored in `/templates/` directory
-- **Simple build script** copies templates to `/dist/`  
+- **Simple build script** copies templates to `/dist/`
 - **No complex dependencies** - just Node.js and http-server
 - **Fast builds** - No bundling or compilation needed
 
@@ -79,15 +79,26 @@ Full CRUD inventory system with stock tracking.
 
 ### Development Commands
 
-**Main Project:**
+**Main Project (with main site features):**
 - **`npm run dev`** - Start development server with automatic rebuilds and file watching
-- **`npm run build`** - Build templates to `dist/` directory  
-- **`npm start`** - Build once and serve (no file watching)
+- **`npm run build`** - Build templates with main site features (back buttons, badges)
+- **`npm start`** - Build with main site features and serve
 - **`npm run watch`** - Advanced: Run file watcher and server separately
+
+**Main Project (standalone/clean mode):**
+- **`npm run dev:standalone`** - Development server with clean templates
+- **`npm run build:standalone`** - Build clean templates without main site features
+- **`npm run start:standalone`** - Build standalone and serve
+- **`npm run watch:standalone`** - File watcher with clean templates
+
+**Advanced Options:**
+- **`INJECT_FEATURES=false npm run dev`** - Use environment variable
+- **`node dev-server.js --no-inject`** - Direct CLI control
+- **`node build.js --help`** - Show all build options
 
 **Individual Templates:**
 - **`npm run dev:feedback`** - Run feedback template standalone
-- **`npm run dev:testimonials`** - Run testimonials template standalone  
+- **`npm run dev:testimonials`** - Run testimonials template standalone
 - **`npm run dev:jobs`** - Run jobs template standalone
 - **`npm run dev:inventory`** - Run inventory template standalone
 
@@ -102,14 +113,14 @@ npm start    # serves template on localhost:3000
 
 **For Main Project Development:**
 1. Run `npm run dev` to start development server
-2. Edit any file in `templates/` or `src/`  
+2. Edit any file in `templates/` or `src/`
 3. Browser automatically refreshes with changes
 4. Server runs on `http://localhost:3000`
 
 **For Individual Template Development:**
 1. `cd templates/[template-name]` (e.g., `cd templates/feedback`)
 2. `npm install` (first time only)
-3. `npm start` or `npm run dev` 
+3. `npm start` or `npm run dev`
 4. Template serves directly on `http://localhost:3000`
 5. Edit template files directly - no build step needed!
 
@@ -119,7 +130,7 @@ npm start    # serves template on localhost:3000
 sheetbest-templates/
 ├── templates/              # Individual template directories
 │   ├── feedback/           # Feedback form template
-│   ├── testimonials/       # Testimonials template  
+│   ├── testimonials/       # Testimonials template
 │   ├── jobs/               # Jobs board template
 │   └── inventory/          # Inventory management template
 ├── src/
@@ -136,9 +147,50 @@ sheetbest-templates/
 
 The build process:
 1. Copies main index page from `src/` to `dist/`
-2. Copies all templates from `templates/` to `dist/`
-3. Copies shared assets (images, etc.)
-4. Generates routing configuration
+2. **Enhances templates** with main site features (back buttons, navigation)
+3. Copies all templates from `templates/` to `dist/`
+4. Copies shared assets (images, etc.)
+5. Generates routing configuration
+
+**Main Site Enhancements (configurable during build):**
+- **Back Button** - Fixed top-left "Back to Templates" button
+- **Template Badge** - Top-right indicator showing template name
+- **Enhanced Navigation** - Smart back button with history fallback
+- **Page Title** - Appends "- SheetBest Templates" to template titles
+
+**Main Site Feature Control:**
+
+The system supports flexible control of main site features through multiple methods:
+
+**📋 Priority Order:**
+1. CLI arguments (`--inject`, `--no-inject`, `--standalone`)
+2. Environment variable (`INJECT_FEATURES=true/false`)
+3. Default behavior (inject features)
+
+**⚙️ Control Methods:**
+```bash
+# CLI Arguments (highest priority)
+npm run build                         # Default: inject features
+npm run build:standalone              # Clean templates
+npm run dev:standalone                # Clean development
+node build.js --no-inject             # Force clean build
+node dev-server.js --inject           # Force inject in dev
+
+# Environment Variables
+INJECT_FEATURES=false npm run build   # Clean build via env var
+INJECT_FEATURES=true npm run dev      # Force inject via env var
+
+# Mixed Usage
+INJECT_FEATURES=false npm run dev --inject  # CLI overrides env var
+```
+
+**🎯 Use Cases:**
+- **Default mode**: Integrated template site experience
+- **Standalone mode**: Individual template repositories, clean demos
+- **Development**: Switch between modes while developing
+- **CI/CD**: Control deployment mode via environment variables
+
+These enhancements are **automatically injected** during build and don't modify the original template files.
 
 ### Creating New Templates
 
@@ -157,7 +209,7 @@ The build process:
 ### Other Platforms
 The build outputs static files to `dist/` that can be deployed anywhere:
 - Netlify
-- Vercel  
+- Vercel
 - GitHub Pages
 - Any static hosting
 
@@ -166,7 +218,7 @@ The build outputs static files to `dist/` that can be deployed anywhere:
 Each template uses [SheetBest](https://sheetbest.com) to connect to Google Sheets:
 
 1. Create a Google Sheet with the required columns
-2. Sign up at [SheetBest](https://sheetbest.com)  
+2. Sign up at [SheetBest](https://sheetbest.com)
 3. Connect your sheet and get API endpoint
 4. Update the template's `data-sheet-best` attribute
 
@@ -175,7 +227,7 @@ Each template uses [SheetBest](https://sheetbest.com) to connect to Google Sheet
 ### Styling
 Templates use Tailwind CSS via CDN. Modify classes directly in HTML or add custom CSS.
 
-### Functionality  
+### Functionality
 Each template uses vanilla JavaScript for maximum compatibility and easy customization.
 
 ### Form Fields

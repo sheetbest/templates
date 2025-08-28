@@ -2,11 +2,14 @@
 
 ## 🎯 Overview
 
-Each template is now completely self-contained and can be developed, tested, and deployed independently. This makes them ready for:
-- Individual GitHub repositories
-- GitHub template repositories ("Use this template")
-- Standalone development
-- Independent deployment
+Each template is completely self-contained and can be developed, tested, and deployed independently. Templates remain **clean and unmodified** in their source form - navigation features are only injected during main site builds.
+
+**Key Benefits:**
+- Individual GitHub repositories ready
+- GitHub template repositories ("Use this template") ready
+- Standalone development without pollution
+- Independent deployment capability
+- **Clean source code** - no main site dependencies
 
 ## 🏗️ Template Structure
 
@@ -53,7 +56,7 @@ open index.html  # Works directly in browser!
 Each template has these npm scripts:
 
 - **`npm start`** - Serves template with caching enabled
-- **`npm run dev`** - Serves with cache disabled (for development)  
+- **`npm run dev`** - Serves with cache disabled (for development)
 - **`npm run preview`** - Serves with CORS enabled (for testing APIs)
 
 ## 🔄 Benefits for Future Submodule Migration
@@ -73,7 +76,7 @@ Each template has these npm scripts:
 
 ### Current Development Benefits
 - **Faster development** - work on single template
-- **No build complexity** - templates work directly  
+- **No build complexity** - templates work directly
 - **Easy testing** - test individual templates
 - **Clean separation** - no cross-template dependencies
 
@@ -88,7 +91,7 @@ npm run dev
 # Browser shows changes immediately
 ```
 
-### Testing Jobs Template  
+### Testing Jobs Template
 ```bash
 cd templates/jobs
 npm start
@@ -100,7 +103,7 @@ npm start
 1. Create new directory in `templates/`
 2. Copy `package.json` from existing template
 3. Create `index.html` with template content
-4. Add `README.md` with documentation  
+4. Add `README.md` with documentation
 5. Run `npm start` in template directory
 6. Main project auto-discovers new template on next build
 
@@ -113,10 +116,58 @@ Each template can be deployed to:
 - Vercel (import template directory)
 - Any static hosting
 
-### Main Project Deployment  
+### Main Project Deployment
 Main project builds all templates into `dist/`:
 - Cloudflare Pages
 - Netlify with build command
 - Any platform supporting Node.js builds
+
+## 🔄 Dynamic Main Site Features
+
+### Automatic Injection During Build
+
+When templates are built as part of the main site (`npm run build`), the build system automatically injects:
+
+**🔙 Back Button**
+- Fixed position (top-left)
+- "Back to Templates" functionality
+- Smart navigation (history.back() or fallback to `/`)
+
+**🏷️ Template Badge**
+- Fixed position (top-right)
+- Shows template name (e.g., "Feedback Template")
+- Styled consistently across all templates
+
+**📝 Enhanced Page Titles**
+- Appends "- SheetBest Templates" to original titles
+- Maintains SEO while indicating main site context
+
+### Source Code Remains Clean
+
+```bash
+# Original template (clean)
+templates/feedback/index.html
+# ↓ Build process
+# Built template (enhanced)
+dist/feedback/index.html
+```
+
+**Key Points:**
+- ✅ **Source templates** remain completely unmodified
+- ✅ **Individual development** shows clean templates
+- ✅ **Main site build** adds navigation features
+- ✅ **No code pollution** in template source
+- ✅ **Perfect for separate repositories**
+
+### Testing Both Modes
+
+```bash
+# Clean template (no back button)
+cd templates/feedback
+npm run dev
+
+# Enhanced template (with back button)
+npm run dev  # from root, then visit /feedback
+```
 
 The system is now fully prepared for the submodule migration while maintaining excellent developer experience!
