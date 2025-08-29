@@ -1,3 +1,12 @@
 [submodule "templates/feedback"]
 	path = templates/feedback
 	url = git@github.com:sheetbest/feedback-template.git
+[submodule "templates/testimonials"]
+	path = templates/testimonials
+	url = git@github.com:sheetbest/testimonials-template.git
+[submodule "templates/jobs"]
+	path = templates/jobs
+	url = git@github.com:sheetbest/jobs-template.git
+[submodule "templates/inventory"]
+	path = templates/inventory
+	url = git@github.com:sheetbest/inventory-template.git
