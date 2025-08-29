@@ -3,6 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// Load environment variables from .env file
+require('dotenv').config();
+
 // Show help if requested
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log(`
@@ -16,8 +19,12 @@ Options:
   --watch                      Watch mode (internal use)
   --help, -h                   Show this help message
 
-Environment Variables:
+Environment Variables (.env file or shell):
   INJECT_FEATURES=true|false   Control feature injection (CLI args take priority)
+  GA4_MEASUREMENT_ID=G-XXXXXX  Google Analytics 4 measurement ID (optional)
+
+Configuration:
+  Copy .env.sample to .env and configure your environment variables
 
 Examples:
   node build.js                        # Build with main site features (default)
@@ -56,8 +63,67 @@ const timestamp = new Date().toLocaleTimeString();
 const modeText = injectMainSiteFeatures ? 'with main site features' : 'standalone mode';
 console.log(`🏗️  ${isWatchMode ? '[' + timestamp + '] Rebuilding' : 'Building'} SheetBest Templates (${modeText})...\n`);
 
-// Function to inject main site features (back button, navigation)
+// Function to inject main site features (back button, navigation, GA4)
 function injectMainSiteFeaturesIntoHtml(htmlContent, templateName) {
+  // Get GA4 measurement ID from environment variable
+  const ga4MeasurementId = process.env.GA4_MEASUREMENT_ID;
+
+  // GA4 initialization script (only inject if measurement ID is provided)
+  const ga4Script = ga4MeasurementId ? `
+  <!-- Google Analytics 4 (injected during build) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${ga4MeasurementId}');
+
+    // SheetBest Templates GA4 Event Tracking
+    const TEMPLATE_SLUG = '${templateName}';
+
+    // Track template view on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      gtag('event', 'template_view', {
+        'template_slug': TEMPLATE_SLUG
+      });
+    });
+
+    // Function to track button clicks
+    function trackTemplateEvent(eventName, templateSlug) {
+      gtag('event', eventName, {
+        'template_slug': templateSlug || TEMPLATE_SLUG
+      });
+    }
+
+    // Add event listeners to template action buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      // Track "Copy Google Sheet" button clicks
+      const copyButtons = document.querySelectorAll('a[href*="docs.google.com"][href*="/copy"]');
+      copyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          trackTemplateEvent('copy_sheet_click', TEMPLATE_SLUG);
+        });
+      });
+
+      // Track "View code" button clicks
+      const viewCodeButtons = document.querySelectorAll('a[href*="github.com"]:not([href*="/generate"])');
+      viewCodeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          trackTemplateEvent('view_code', TEMPLATE_SLUG);
+        });
+      });
+
+      // Track "Use this template" button clicks
+      const useTemplateButtons = document.querySelectorAll('a[href*="github.com"][href*="/generate"]');
+      useTemplateButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          trackTemplateEvent('use_template', TEMPLATE_SLUG);
+        });
+      });
+    });
+  </script>
+  ` : '';
+
   // Back button HTML
   const backButtonHtml = `
   <!-- Main Site Navigation (injected during build) -->
@@ -99,6 +165,14 @@ function injectMainSiteFeaturesIntoHtml(htmlContent, templateName) {
     });
   </script>
   `;
+
+  // Inject GA4 script in head section (only if measurement ID is provided)
+  if (ga4MeasurementId) {
+    htmlContent = htmlContent.replace(
+      /<\/head>/i,
+      `${ga4Script}</head>`
+    );
+  }
 
   // Inject back button after opening body tag
   htmlContent = htmlContent.replace(
@@ -159,12 +233,12 @@ templates.forEach(template => {
       if (file === 'index.html') {
         // Process HTML file
         let htmlContent = fs.readFileSync(srcFile, 'utf8');
-        
+
         // Inject main site features if enabled
         if (injectMainSiteFeatures) {
           htmlContent = injectMainSiteFeaturesIntoHtml(htmlContent, template);
         }
-        
+
         fs.writeFileSync(destFile, htmlContent);
       } else {
         fs.copyFileSync(srcFile, destFile);

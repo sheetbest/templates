@@ -33,9 +33,9 @@
   "author": "SheetBest",
   "license": "MIT",
   "devDependencies": {
-    "http-server": "^14.1.1",
     "chokidar-cli": "^3.0.0",
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "http-server": "^14.1.1"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -44,5 +44,8 @@
     "type": "git",
     "url": "https://github.com/sheetbest/templates"
   },
-  "homepage": "https://github.com/sheetbest/templates#readme"
+  "homepage": "https://github.com/sheetbest/templates#readme",
+  "dependencies": {
+    "dotenv": "^17.2.1"
+  }
 }
